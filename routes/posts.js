@@ -1,14 +1,14 @@
 import express from "express";
-import {getFeedPosts , getUserPosts, likePost} from "../controllers/posts.js";
-import { verifyToken } from "../middleware/authorization.js";
+import { getFeedPosts, getUserPosts, likePost } from "../controllers/posts.js";
+import { verifyToken } from "../middleware/auth.js";
 
-const postRoutes = express.Router();
+const router = express.Router();
 
-//READ (The below command will grab the user feed on the home page)
-postRoutes.get("/",verifyToken,getFeedPosts);
-postRoutes.get("/:userId/posts" , verifyToken, getUserPosts);
+/* READ */
+router.get("/", verifyToken, getFeedPosts);
+router.get("/:userId/posts", verifyToken, getUserPosts);
 
-//UPDATE
-postRoutes.patch("/:id/like",verifyToken, likePost);
+/* UPDATE */
+router.patch("/:id/like", verifyToken, likePost);
 
-export default postRoutes;
+export default router;
